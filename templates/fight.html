@@ -1,0 +1,145 @@
+{% extends "layout.html" %}
+{% block content %}
+    <div class="div_center" style="margin-top: 20px">
+        <main style="width: 900px; margin: auto">
+            <div class="container div_center">
+                <div class="row align-text-top">
+                    <div class="col align-self-start">
+                        <h2 style="color: rgb(111,157,197)">{{ heroes.player.name }}</h2>
+                        <img src="/static/images/{{ heroes.player.unit_class.name | lower }}.png">
+                        <h4 style="color: rgb(111,157,197)">class: {{ heroes.player.unit_class.name }}</h4>
+                        <div class="info_item">
+                            <h5 style="color: #257a27">Skill:</h5>
+                            {{ heroes.player.unit_class.skill.name }} / DMG: {{ heroes.player.unit_class.skill.damage }}
+                            | ST: {{ heroes.player.unit_class.skill.stamina }}
+                        </div>
+                        <div class="info_item">
+                            <h5 style="color: #257a27">Equipment:</h5>
+                        </div>
+                        <div class="info_item div_row">
+                            <div class="col left">
+                                <div class="div_center">Weapon<br>
+                                    <img src="/static/images/{{ heroes.player.weapon.name | lower }}.png">
+                                </div>
+                                <div class="div_center">{{ heroes.player.weapon.name }}<br>
+                                    Damage: {{ heroes.player.weapon.min_damage }}
+                                    - {{ heroes.player.weapon.max_damage }}</div>
+                            </div>
+                            <div class="col right">
+                                <div class="div_center">Armor<br>
+                                    <img src="/static/images/{{ heroes.player.armor.name | lower }}.png">
+                                </div>
+                                <div class="div_center">{{ heroes.player.armor.name }}<br>
+                                    Defence: {{ heroes.player.armor.defence }}</div>
+                            </div>
+                        </div>
+                        <div class="info_item">Health
+                            <div class="div_center div_row">
+                                <div class="col left">{{ heroes.player.health_points }}</div>
+                                <div class="col health-bar" data-total="100" data-value="100">
+                                    <div class="bar"
+                                         style="width: {{ heroes.player.health_points * 100 // heroes.player.unit_class.max_health }}%;"></div>
+                                </div>
+                                <div class="col right">{{ heroes.player.unit_class.max_health }}</div>
+                            </div>
+                        </div>
+                        <div class="info_item">Stamina
+                            <div class="div_center div_row">
+                                <div class="col left">{{ heroes.player.stamina_points }}</div>
+                                <div class="col health-bar" data-total="100" data-value="100">
+                                    <div class="bar_stamina"
+                                         style="width: {{ heroes.player.stamina_points * 100 // heroes.player.unit_class.max_stamina }}%;"></div>
+                                </div>
+                                <div class="col right">{{ heroes.player.unit_class.max_stamina }}</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col align-content-center" style="max-width: 200px; margin: auto">
+                        <button type="button" onclick="window.location.href='/fight/hit'"
+                                class="btn btn-success m-2 button">
+                            Hit
+                        </button>
+                        <br>
+                        <button type="button" onclick="window.location.href='/fight/use-skill'"
+                                class="btn btn-danger m-2 button">
+                            Use skill
+                        </button>
+                        <br>
+                        <button type="button" onclick="window.location.href='/fight/pass-turn'"
+                                class="btn btn-warning m-2 button">
+                            Skip turn
+                        </button>
+                        <br>
+                        <button type="button" onclick="window.location.href='/fight/end-fight'"
+                                class="btn btn-secondary m-2 button">
+                            End fight
+                        </button>
+                    </div>
+                    <div class="col align-self-start">
+                        <h2 style="color: rgb(111,157,197)">{{ heroes.enemy.name }}</h2>
+                        <img src="/static/images/{{ heroes.enemy.unit_class.name | lower }}.png">
+                        <h4 style="color: rgb(111,157,197)">class: {{ heroes.enemy.unit_class.name }}</h4>
+                        <div class="info_item">
+                            <h5 style="color: #257a27">Skill:</h5>
+                            {{ heroes.enemy.unit_class.skill.name }} / DMG: {{ heroes.enemy.unit_class.skill.damage }}
+                            | ST: {{ heroes.enemy.unit_class.skill.stamina }}
+                        </div>
+                        <div class="info_item">
+                            <h5 style="color: #257a27">Equipment:</h5>
+                        </div>
+                        <div class="info_item div_row">
+                            <div class="col left">
+                                <div class="div_center">Weapon<br>
+                                    <img src="/static/images/{{ heroes.enemy.weapon.name | lower }}.png">
+                                </div>
+                                <div class="div_center">{{ heroes.enemy.weapon.name }}<br>
+                                    Damage: {{ heroes.enemy.weapon.min_damage }}
+                                    - {{ heroes.enemy.weapon.max_damage }}</div>
+                            </div>
+                            <div class="col right">
+                                <div class="div_center">Armor<br>
+                                    <img src="/static/images/{{ heroes.enemy.armor.name | lower }}.png">
+                                </div>
+                                <div class="div_center">{{ heroes.enemy.armor.name }}<br>
+                                    Defence: {{ heroes.enemy.armor.defence }}</div>
+                            </div>
+                        </div>
+                        <div class="info_item">Health
+                            <div class="div_center div_row">
+                                <div class="col left">{{ heroes.enemy.health_points }}</div>
+                                <div class="col health-bar"
+                                     data-total="{{ heroes.enemy.unit_class.max_health }}"
+                                     data-value="{{ heroes.enemy.health_points }}">
+                                    <div class="bar"
+                                         style="width: {{ heroes.enemy.health_points * 100 // heroes.enemy.unit_class.max_health }}%;"></div>
+                                </div>
+                                <div class="col right">{{ heroes.enemy.unit_class.max_health }}</div>
+                            </div>
+                        </div>
+                        <div class="info_item">Stamina
+                            <div class="div_center div_row">
+                                <div class="col left">{{ heroes.enemy.stamina_points }}</div>
+                                <div class="col health-bar"
+                                     data-total="{{ heroes.enemy.unit_class.max_stamina }}"
+                                     data-value="{{ heroes.enemy.stamina_points }}">
+                                    <div class="bar_stamina"
+                                         style="width: {{ heroes.enemy.stamina_points * 100 // heroes.enemy.unit_class.max_stamina }}%;"></div>
+                                </div>
+                                <div class="col right">{{ heroes.enemy.unit_class.max_stamina }}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <hr>
+                <div class="row">
+                    <div class="col align-content-center div_center">
+                        <p><em>{{ result|safe }}</em></p>
+                        <p>{{ battle_result }}</p>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+{% endblock %}

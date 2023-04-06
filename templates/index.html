@@ -1,0 +1,20 @@
+{% extends "layout.html" %}
+{% block content %}
+    <div class="center">
+        <main style="width: 450px; align-content: center;">
+            <div class="container mx-auto div_center">
+                <div class="row">
+                    <img src="{{ url_for('static', filename='images/heroes_logo.png') }}">
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <p>
+                            <button type="button" onclick="window.location.href='/choose-hero/'"
+                                    class="btn btn-success m-2">Start the game!</button>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+{% endblock %}

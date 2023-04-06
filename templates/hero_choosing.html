@@ -1,0 +1,50 @@
+{% extends "layout.html" %}
+{% block content %}
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+            integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+            crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+            crossorigin="anonymous"></script>
+    <div class="center">
+        <main style="width: 450px; align-content: center;">
+            <div class="container div_center">
+                <div class="row">
+                    <img src="{{ url_for('static', filename='images/heroes_logo.png') }}">
+                </div>
+                <h3 {%  if 'enemy' in result.header %}style="color: #ff2828"{% endif %}>{{ result.header }}</h3>
+                <form action="" method="post">
+                    <div class="form-group">
+                        <input type="text" name="name" class="name_field" placeholder="Name">
+                        <hr>
+                        <select name="unit_class" required>
+                            <option value="">Choose Class</option>
+                            {% for class in result.classes %}
+                                <option value="{{ class }}">{{ class }}</option>
+                            {% endfor %}
+                        </select>
+                        <hr>
+                        <select class="custom-select" name="weapon" required>
+                            <option value="">Choose Weapon</option>
+                            {% for weapon_name in result.weapons %}
+                                <option value="{{ weapon_name }}">{{ weapon_name }}</option>
+                            {% endfor %}
+                        </select>
+                        <hr>
+                        <select class="custom-select" name="armor" required>
+                            <option value="">Choose Armor</option>
+                            {% for armor_name in result.armors %}
+                                <option value="{{ armor_name }}">{{ armor_name }}</option>
+                            {% endfor %}
+                        </select>
+                        <hr>
+                    </div>
+                    <button class="btn btn-success" type="submit">Next</button>
+                </form>
+            </div>
+        </main>
+    </div>
+{% endblock %}
