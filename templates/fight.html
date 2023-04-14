@@ -6,7 +6,7 @@
                 <div class="row align-text-top">
                     <div class="col align-self-start">
                         <h2 style="color: rgb(111,157,197)">{{ heroes.player.name }}</h2>
-                        <img src="/static/images/{{ heroes.player.unit_class.name | lower }}.png">
+                        <img src="/static/images/{{ heroes.player.unit_class.name.lower() }}.png">
                         <h4 style="color: rgb(111,157,197)">class: {{ heroes.player.unit_class.name }}</h4>
                         <div class="info_item">
                             <h5 style="color: #257a27">Skill:</h5>
@@ -77,7 +77,7 @@
                     </div>
                     <div class="col align-self-start">
                         <h2 style="color: rgb(111,157,197)">{{ heroes.enemy.name }}</h2>
-                        <img src="/static/images/{{ heroes.enemy.unit_class.name | lower }}.png">
+                        <img src="/static/images/{{ heroes.enemy.unit_class.name.lower() }}.png">
                         <h4 style="color: rgb(111,157,197)">class: {{ heroes.enemy.unit_class.name }}</h4>
                         <div class="info_item">
                             <h5 style="color: #257a27">Skill:</h5>
@@ -90,7 +90,7 @@
                         <div class="info_item div_row">
                             <div class="col left">
                                 <div class="div_center">Weapon<br>
-                                    <img src="/static/images/{{ heroes.enemy.weapon.name | lower }}.png">
+                                    <img src="/static/images/{{ heroes.enemy.weapon.name.lower() }}.png">
                                 </div>
                                 <div class="div_center">{{ heroes.enemy.weapon.name }}<br>
                                     Damage: {{ heroes.enemy.weapon.min_damage }}

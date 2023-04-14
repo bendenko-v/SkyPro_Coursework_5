@@ -75,6 +75,9 @@ def choose_enemy():
 def fight():
     arena.start_game(player=heroes['player'], enemy=heroes['enemy'])
 
+    print(heroes['player'].unit_class)
+    print(heroes['enemy'].unit_class)
+
     return render_template('fight.html', heroes=heroes)
 
 
@@ -108,12 +111,12 @@ def end():
     return render_template('fight.html', heroes=heroes, result=result)
 
 
-equip = Equipment()  # load equipment (weapons and armors data)
-arena = Arena()  # create Arena instance
-heroes = {
-    'player': Type[BaseUnit],
-    'enemy': Type[BaseUnit],
-}
-
 if __name__ == '__main__':
+    equip = Equipment()  # load equipment (weapons and armors data)
+    arena = Arena()  # create Arena instance
+    heroes = {
+        'player': Type[BaseUnit],
+        'enemy': Type[BaseUnit],
+    }
+
     app.run(host='0.0.0.0', port=80)
