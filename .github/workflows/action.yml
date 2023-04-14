@@ -6,9 +6,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: list dir
-        run: ls -la
       - name: clone code
         uses: actions/checkout@v2
-      - name: second list dir
-        run: ls -la
+      - name: docker build
+        run: docker build -t smopuim85/coursework_5:$GITHUB_REF_NAME-$GITHUB_RUN_ID .
