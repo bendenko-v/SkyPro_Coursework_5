@@ -82,9 +82,6 @@ def choose_enemy():
 def fight():
     arena.start_game(player=heroes['player'], enemy=heroes['enemy'])
 
-    print(heroes['player'].unit_class)
-    print(heroes['enemy'].unit_class)
-
     return render_template('fight.html', heroes=heroes)
 
 
