@@ -11,6 +11,13 @@ from classes.equipment import Equipment
 
 app = Flask(__name__)
 
+equip = Equipment()  # load equipment (weapons and armors data)
+arena = Arena()  # create Arena instance
+heroes = {
+    'player': Type[BaseUnit],
+    'enemy': Type[BaseUnit],
+}
+
 
 @app.route('/')
 def index():
@@ -111,12 +118,4 @@ def end():
     return render_template('fight.html', heroes=heroes, result=result)
 
 
-if __name__ == '__main__':
-    equip = Equipment()  # load equipment (weapons and armors data)
-    arena = Arena()  # create Arena instance
-    heroes = {
-        'player': Type[BaseUnit],
-        'enemy': Type[BaseUnit],
-    }
-
-    app.run(host='0.0.0.0', port=80)
+app.run(host='0.0.0.0', port=80)
