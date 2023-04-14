@@ -34,11 +34,11 @@ class Arena(metaclass=BaseSingleton):
         return self._end_game()
 
     def _check_players_hp(self) -> str | None:
-        # TODO ПРОВЕРКА ЗДОРОВЬЯ ИГРОКА И ВРАГА
-        # TODO проверка здоровья игрока и врага и возвращение результата строкой:
-        # TODO может быть три результата:
-        # TODO Игрок проиграл битву, Игрок выиграл битву, Ничья и сохраняем его в аттрибуте (self.result)
-        # TODO если Здоровья игроков в порядке то ничего не происходит
+        """
+        Heroes health check
+        Returns:
+            result of the battle or None
+        """
         match (self.player.health_points > 0, self.enemy.health_points > 0):
             case (False, False):
                 return 'Nobody left alive!<br>'
