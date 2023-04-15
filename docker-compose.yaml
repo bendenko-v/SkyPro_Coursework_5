@@ -6,4 +6,4 @@ services:
       context: .
     image: smopuim85/coursework_5
     ports:
-      - "8080:80"
+      - "80:80"

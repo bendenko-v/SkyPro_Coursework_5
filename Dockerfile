@@ -5,4 +5,4 @@ COPY requirements.txt .
 RUN pip install -r requirements.txt
 COPY . .
 
-CMD ["gunicorn", "app:app", "-w", "4", "-b", "0.0.0.0:80", "--timeout", "60"]
+CMD flask run -h 0.0.0.0 -p 80

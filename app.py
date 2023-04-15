@@ -115,4 +115,4 @@ def end():
     return render_template('fight.html', heroes=heroes, result=result)
 
 
-app.run(host='0.0.0.0', port=80)
+app.run()
