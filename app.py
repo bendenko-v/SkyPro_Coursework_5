@@ -1,6 +1,8 @@
 from typing import Type
 
 from flask import Flask, render_template, request, redirect, abort
+from flask_session import Session
+from redis import Redis
 
 from classes.arena import Arena
 from classes.baseunit import BaseUnit
@@ -10,6 +12,14 @@ from classes.units import units
 from classes.equipment import Equipment
 
 app = Flask(__name__)
+
+# Configure Redis as a session store
+app.config['SESSION_TYPE'] = 'redis'
+app.config['SESSION_REDIS'] = Redis(host='127.0.0.1', port=6379)
+app.secret_key = 'your-secret-key-146%'
+
+# Initialize Flask-Session
+Session(app)
 
 equip = Equipment()  # load equipment (weapons and armors data)
 arena = Arena()  # create Arena instance
@@ -115,4 +125,5 @@ def end():
     return render_template('fight.html', heroes=heroes, result=result)
 
 
-app.run()
+if __name__ == '__main__':
+    app.run(host='127.0.0.1', port=5000)
