@@ -1,5 +1,5 @@
 name: Build and deploy workflow
-on: [push]
+on: [ push ]
 
 jobs:
   build_and_push:
@@ -18,22 +18,23 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     needs: build_and_push
-
     steps:
       - name: clone code
         uses: actions/checkout@v2
       - name: render configs
         run: |
+          export REDIS_PASSWORD=${{ secrets.REDIS_PASSWORD }}
           mkdir deploy
-          cat docker-compose-ci.yaml | envsubst > deploy/docker-compose.yaml
-          cp nginx.conf deploy/nginx.conf
+          envsubst < docker-compose-ci.yaml > deploy/docker-compose.yaml
+          envsubst < redis.conf > deploy/redis.conf
+          cat nginx.conf > deploy/nginx.conf
       - name: copy files to VM
         uses: appleboy/scp-action@master
         with:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.SSH_USERNAME }}
           password: ${{ secrets.SSH_PASSWORD }}
-          source: "deploy/docker-compose.yaml"
+          source: "deploy/docker-compose.yaml,deploy/nginx.conf,deploy/redis.conf"
           target: "flask_app_ci"
           strip_components: 1
 
@@ -46,4 +47,3 @@ jobs:
           script: |
             cd flask_app_ci
             echo ${{ secrets.SSH_PASSWORD }} | sudo -S docker-compose up -d
-            docker exec flask_app_ci_nginx_1 nginx -c /etc/nginx/nginx.conf

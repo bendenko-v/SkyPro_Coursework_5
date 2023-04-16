@@ -1,6 +1,6 @@
 from typing import Type
 
-from flask import Flask, render_template, request, redirect, abort
+from flask import Flask, session, render_template, request, redirect, abort
 from flask_session import Session
 from redis import Redis
 
@@ -15,7 +15,7 @@ app = Flask(__name__)
 
 # Configure Redis as a session store
 app.config['SESSION_TYPE'] = 'redis'
-app.config['SESSION_REDIS'] = Redis(host='127.0.0.1', port=6379)
+app.config['SESSION_REDIS'] = Redis(host='redis', port=6379)
 app.secret_key = 'your-secret-key-146%'
 
 # Initialize Flask-Session
@@ -27,6 +27,12 @@ heroes = {
     'player': Type[BaseUnit],
     'enemy': Type[BaseUnit],
 }
+
+
+@app.route('/session')
+def session_key():
+    """ Just for testing """
+    return f'Session key: {session.sid}'
 
 
 @app.route('/')
@@ -126,4 +132,4 @@ def end():
 
 
 if __name__ == '__main__':
-    app.run(host='127.0.0.1', port=5000)
+    app.run()
