@@ -4,6 +4,28 @@ services:
   app:
     build:
       context: .
-    image: smopuim85/coursework_5
     ports:
       - "80:80"
+    command: flask run -h 0.0.0.0 -p 80
+    restart: always
+    depends_on:
+      - redis
+
+  redis:
+    image: redis:7.0.10
+    volumes:
+      - ./redis.conf:/etc/redis/redis.conf
+    ports:
+      - "6379:6379"
+    command: redis-server
+    restart: always
+
+  nginx:
+    image: nginx:1.20
+    volumes:
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf
+    ports:
+      - "8081:80"
+    restart: always
+    depends_on:
+      - app
