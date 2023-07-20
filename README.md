@@ -1,6 +1,6 @@
-# SkyPro / Coursework 5
+# "Heroes of SkyWars"
 
-Web game "Heroes of SkyWars" based on Flask and templates.
+Web game based on Flask and templates.
 
 ![Starting page](https://habrastorage.org/webt/tf/wd/yf/tfwdyfdcecps9vcq6o8jlpw4tqo.jpeg)
 
